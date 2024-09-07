@@ -21,9 +21,9 @@ export default function Header() {
       </Link>
       <nav className="flex gap-4 items-center text-gray-500 font-semibold">
         <Link href={"/"}>Home</Link>
-        <Link href={"/menu"}>Menu</Link>
         <Link href={"/about"}>About</Link>
-        <Link href={"/contact"}>Contact</Link>
+        <Link href={"/donation"}>Donor</Link>
+        <Link href={"/contact"}>Contact us</Link>
       </nav>
       <div className="flex items-center gap-4">
         {status === "authenticated" ? (
