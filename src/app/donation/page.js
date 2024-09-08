@@ -25,7 +25,7 @@ function DonationPage() {
       setUserName(session.user.name);
       fetch('api/donorProfile').then(response => {
         response.json().then(data => {
-        //   setFormData(data);
+          setFormData(data);
           console.log(data);
         })
       })
@@ -51,7 +51,6 @@ function DonationPage() {
         body: JSON.stringify({ 
             name: userName,
             phoneNumber: formData.phoneNumber,
-            email: formData.email,
             address: formData.address,
             age: formData.age,
             bloodGroup: formData.bloodGroup,
@@ -116,8 +115,8 @@ function DonationPage() {
             type="email"
             id="email"
             name="email"
+            disabled={true}
             value={formData.email}
-            onChange={handleChange}
             className="shadow appearance-none border rounded w-full py-2 px-3
              text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
