@@ -29,7 +29,7 @@ export async function PUT(req) {
     await User.updateOne(filter, { name });
   
     // Update donor info using email as the filter, upsert ensures a new entry if not found
-    await DonorInfo.findOneAndUpdate({ email: user.email }, otherUserInfo, {
+    await DonorInfo.findOneAndUpdate({ email: user.email }, {name, ...otherUserInfo}, {
       upsert: true,
     });
   

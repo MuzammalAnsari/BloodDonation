@@ -2,6 +2,7 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import Header from "../components/layout/Header";
 import AppProvider from "../components/AppContext";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,8 +17,12 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <main className="max-w-4xl mx-auto p-4">
           <AppProvider>
+            <Toaster/>
             <Header />
             {children}
+            <footer className="border-t p-8 text-center text-gray-500 mt-16">
+              &copy; 2024 Company, Inc. All rights reserved.
+            </footer>
           </AppProvider>
         </main>
       </body>
