@@ -5,6 +5,8 @@ import { useState, useEffect } from "react";
 import DistrictDetails from "../../components/layout/DistrictDetails";
 import { resolve } from "path";
 import toast from "react-hot-toast";
+import { Button } from "@/components/ui/button";
+import { DatePicker } from "@/components/DatePicker";
 
 function DonationPage() {
   const { data: session, status } = useSession(); // Destructure session and status
@@ -93,7 +95,7 @@ function DonationPage() {
       <form onSubmit={handleSubmit}>
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label htmlFor="firstName" className="block mb-2 text-gray-700">
+            <label htmlFor="firstName" className="block mb-2 ">
               Name
             </label>
             <input
@@ -103,12 +105,12 @@ function DonationPage() {
               value={userName}
               onChange={(ev) => setUserName(ev.target.value)}
               className="shadow appearance-none border rounded w-full py-2 px-
-             text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
 
           <div>
-            <label htmlFor="phoneNumber" className="block mb-2 text-gray-700">
+            <label htmlFor="phoneNumber" className="block mb-2 ">
               Phone Number
             </label>
             <input
@@ -118,12 +120,12 @@ function DonationPage() {
               value={formData.phoneNumber}
               onChange={handleChange}
               className="shadow appearance-none border rounded w-full py-2 px-
-             text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
 
           <div>
-            <label htmlFor="address" className="block mb-2 text-gray-700">
+            <label htmlFor="address" className="block mb-2 ">
               Address
             </label>
             <textarea
@@ -132,11 +134,11 @@ function DonationPage() {
               value={formData.address}
               onChange={handleChange}
               className="shadow appearance-none border rounded w-full px-3
-             text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
           <div>
-            <label htmlFor="email" className="block mb-2 text-gray-700">
+            <label htmlFor="email" className="block mb-2 ">
               Email
             </label>
             <input
@@ -146,11 +148,11 @@ function DonationPage() {
               disabled={true}
               value={formData.email}
               className="shadow appearance-none border rounded w-full py-2 px-3
-             text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
           <div>
-            <label htmlFor="age" className="block mb-2 text-gray-700">
+            <label htmlFor="age" className="block mb-2 ">
               Age
             </label>
             <input
@@ -160,11 +162,11 @@ function DonationPage() {
               value={formData.age}
               onChange={handleChange}
               className="shadow appearance-none border rounded w-full py-2 px-3
-             text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
           <div>
-            <label htmlFor="bloodGroup" className="block mb-2 text-gray-700">
+            <label htmlFor="bloodGroup" className="block mb-2 ">
               Blood Group
             </label>
             <select
@@ -173,7 +175,7 @@ function DonationPage() {
               value={formData.bloodGroup}
               onChange={handleChange}
               className="shadow appearance-none border rounded w-full py-2 px-3
-             text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              leading-tight focus:outline-none focus:shadow-outline"
             >
               <option value="">Select Blood Group</option>
               <option value="A+">A+</option>
@@ -190,7 +192,7 @@ function DonationPage() {
             <DistrictDetails formData={formData} handleChange={handleChange} />
           </div>
           <div>
-            <label htmlFor="state" className="block mb-2 text-gray-700">
+            <label htmlFor="state" className="block mb-2 ">
               State
             </label>
             <select
@@ -199,13 +201,13 @@ function DonationPage() {
               value={formData.state}
               onChange={handleChange}
               className="shadow appearance-none border rounded w-full py-2 px-3
-             text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              leading-tight focus:outline-none focus:shadow-outline"
             >
               <option value="">Punjab</option>
             </select>
           </div>
           <div>
-            <label htmlFor="pinCode" className="block mb-2 text-gray-700">
+            <label htmlFor="pinCode" className="block mb-2 ">
               Pin Code
             </label>
             <input
@@ -215,35 +217,33 @@ function DonationPage() {
               value={formData.pinCode}
               onChange={handleChange}
               className="shadow appearance-none border rounded w-full py-2 px-3
-             text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+             leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
           <div>
             <label
               htmlFor="lastDonation"
-              className="block mb-2 text-gray-700"
+              className="block mb-2"
             >
               Last Donation
             </label>
-            <input
-              type="month"
-              id="lastDonation"
-              name="lastDonation"
-              value={formData.lastDonation}
-              onChange={handleChange}
-              className="shadow appearance-none border rounded w-full py-2 px-3
-           text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            
+            <DatePicker
+             id="lastDonation"
+             name="lastDonation"
+             value={formData.lastDonation}
+             onChange={handleChange}
             />
           </div>
         </div>
         <div className="text-center mt-4">
-          <button
+          <Button
             type="submit"
-            className="bg-blue-500 hover:bg-blue-700 text-white 
-          font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          //   className="bg-blue-500 hover:bg-blue-700 text-white 
+          // font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >
             Submit
-          </button>
+          </Button>
         </div>
       </form>
     </div>

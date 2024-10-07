@@ -1,7 +1,7 @@
 export default function DistrictDetails({formData, handleChange}) {
   return (
     <div>
-      <label htmlFor="district" className="block mb-2 text-gray-700">
+      <label htmlFor="district" className="block mb-2 ">
         District
       </label>
       <select
@@ -10,7 +10,7 @@ export default function DistrictDetails({formData, handleChange}) {
         value={formData.district}
         onChange={handleChange}
         className="shadow appearance-none border rounded w-full py-2 px-3
-                 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  leading-tight focus:outline-none focus:shadow-outline"
       >
         <option value="">Select District</option>
         <option value="Attock">Attock</option>
