@@ -1,11 +1,6 @@
 const { Schema, models, model } = require("mongoose");
 
 const DonorInfoSchema = new Schema({
-  name: {
-    type: String,
-    required: true,
-    trim: true,
-  },
   phoneNumber: {
     type: String,
     required: true,
@@ -41,7 +36,7 @@ const DonorInfoSchema = new Schema({
     trim: true,
   },
   lastDonation: {
-    type: String,
+    type: Date,
     required: true,
   },
 });

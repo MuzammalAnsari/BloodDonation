@@ -3,15 +3,12 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
 import GoogleProvider from "next-auth/providers/google";
 import mongoose from "mongoose";
-import clientPromise from "../../../../lib/mongoConnect";
-import { MongoDBAdapter } from "@auth/mongodb-adapter";
-import { User } from "../../../models/User";
+import { User } from "../../../models/User"; // Adjust this if needed
 
 export const authOptions = {
   secret: process.env.NEXTAUTH_SECRET,
-  adapter: MongoDBAdapter(clientPromise),
   session: {
-    strategy: "jwt",
+    strategy: "jwt", // Using JWT for session management
   },
   providers: [
     GoogleProvider({
@@ -21,7 +18,7 @@ export const authOptions = {
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        userName: { label: "Email", type: "email", placeholder: "test@example.com" },
+        email: { label: "Email", type: "email", placeholder: "test@example.com" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
@@ -29,42 +26,48 @@ export const authOptions = {
         const password = credentials?.password;
 
         try {
-          mongoose.connect(process.env.MONGO_URL);  
-          const user = await User.findOne({ email: credentials.email });
-          console.log("User found:", user);
-          
+          // Connect to the MongoDB database
+          await mongoose.connect(process.env.MONGO_URL);
+
+          // Find the user by email
+          const user = await User.findOne({ email });
+
           if (!user) {
             console.log("User not found");
             return null;
           }
 
-          const passwordOk = await bcrypt.compareSync(password, user.password);
+          // Compare the provided password with the stored hashed password
+          const passwordOk = await bcrypt.compare(password, user.password);
+
           if (passwordOk) {
             console.log("Login successful for:", email);
-            return user;
+            return user; // Return the user object if the password is correct
           } else {
             console.log("Invalid credentials for:", email);
-            return null;
+            return null; // Return null if the password is incorrect
           }
         } catch (error) {
           console.error("Error during authentication:", error);
-          return null;
+          return null; // Return null if there's an error
         }
       },
     }),
   ],
   callbacks: {
     async jwt({ token, user }) {
+      // Add the user data to the JWT token
       if (user) {
         token.id = user._id; // Add user ID to the token
         token.email = user.email; // Add email to the token
       }
-      return token;
+      return token; // Return the updated token
     },
     async session({ session, token }) {
+      // Add the token data to the session
       session.user.id = token.id;
       session.user.email = token.email;
-      return session;
+      return session; // Return the session with updated user data
     },
   },
 };
